@@ -1,0 +1,11 @@
+{
+    "java.project.sourcePaths": ["src"],
+    "java.project.outputPath": "bin",
+    "java.compile.nullAnalysis.mode": "disabled",
+    
+    "code-runner.executorMap": {
+        "java": "cd $dir && javac -d ../bin $fileName && cd ../bin && java fe.SwingTest"
+    },
+    "code-runner.runInTerminal": true,
+    "java.debug.settings.console": "integratedTerminal"
+}

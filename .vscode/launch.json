@@ -1,0 +1,26 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "java",
+            "name": "SwingTest",
+            "request": "launch",
+            "mainClass": "fe.SwingTest",
+            "projectName": "MayinTarlasi_381f8ce6"
+        },
+        {
+            "type": "java",
+            "name": "Test",
+            "request": "launch",
+            "mainClass": "be.Test",
+            "projectName": "MayinTarlasi_381f8ce6"
+        },
+        {
+            "type": "java",
+            "name": "Launch SwingTest",
+            "request": "launch",
+            "mainClass": "fe.SwingTest",
+            "projectName": "YOUR_PROJECT_NAME"
+        }
+    ]
+}
