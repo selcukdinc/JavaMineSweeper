@@ -52,7 +52,7 @@ jobs:
           done
       
           # Main branch'in bilgilerini ekle
-          get_branch_commits "main"
+          get_branch_commits "master"
           
           # Mevcut içeriğin altına branch bilgilerini ekle
           echo -e "${existing_content}\n\n${branch_info}" > README.md
@@ -72,4 +72,4 @@ jobs:
                 echo "No changes to commit"
             fi
           fi
-          git push origin main
+          git push origin master
