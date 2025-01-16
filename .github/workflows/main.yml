@@ -46,7 +46,7 @@ jobs:
           }
       
           # Tüm diğer branch'leri dolaş ve bilgileri ekle
-          for branch in $(git branch -r | grep -v 'HEAD\|main'); do
+          for branch in $(git branch -r | grep -v 'HEAD\|master'); do
             branch_name=${branch#origin/}
             get_branch_commits "$branch_name"
           done
