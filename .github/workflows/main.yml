@@ -29,16 +29,21 @@ jobs:
           get_branch_commits() {
             local branch_name="$1"
             branch_info="${branch_info}- ${branch_name}\n"
-            branch_info="${branch_info}$(git log "origin/$branch_name" -3 --date=format:'%d.%m.%Y' --pretty=format:"  - %ad - %h - %s%n%b" | awk '
+            
+            local filter_message1="Update README with latest branch commits"
+            local filter_message2="Update main.yml"
+            
+            branch_info="${branch_info}$(git log "origin/$branch_name" -15 --date=format:'%d.%m.%Y' --pretty=format:"  - %ad - %h - %s%n%b" \
+            --grep="$filter_message1" --invert-grep --grep="$filter_message2" --invert-grep | awk '
               BEGIN { RS = ""; FS = "\n" }
               {
-                print "  - " $1
+                print "   \n" $1
                 if (NF > 1) {
                   for (i = 2; i <= NF; i++) {
-                    print "    - " $i
+                    print "      - " $i
                   }
                 } else {
-                  print "    - No description provided."
+                  print "      - No description provided."
                 }
               }
             ')"
@@ -46,13 +51,13 @@ jobs:
           }
       
           # Tüm diğer branch'leri dolaş ve bilgileri ekle
-          for branch in $(git branch -r | grep -v 'HEAD\|master'); do
+          for branch in $(git branch -r | grep -v 'HEAD\|main'); do
             branch_name=${branch#origin/}
             get_branch_commits "$branch_name"
           done
       
           # Main branch'in bilgilerini ekle
-          get_branch_commits "master"
+          get_branch_commits "main"
           
           # Mevcut içeriğin altına branch bilgilerini ekle
           echo -e "${existing_content}\n\n${branch_info}" > README.md
@@ -60,7 +65,6 @@ jobs:
 
       - name: Commit and Push Changes
         run: |
-        
           git config --global user.name "GitHub Action Bot"
           git config --global user.email "actions@github.com"
           git add README.md
@@ -72,4 +76,4 @@ jobs:
                 echo "No changes to commit"
             fi
           fi
-          git push origin master
+          git push origin main
